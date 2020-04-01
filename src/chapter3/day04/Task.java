@@ -2,7 +2,7 @@ package chapter3.day04;
 
 public class Task {
     public static void main(String[] args) {
-        int[] array = {1,3,2,4,5,6};
+        int[] array = {1,3,9,5,6,7,1,15,4,8};
         System.out.println(find(array, 9));
         System.out.println(findMax(array));
         bubble(array);
