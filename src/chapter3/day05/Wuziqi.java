@@ -59,6 +59,11 @@ public class Wuziqi {
             Scanner sc = new Scanner(System.in);
             int ix = sc.nextInt();
             int iy = sc.nextInt();
+            // 判断该位置是否已经有棋子
+            if (chessBoard[ix][iy]!=0){
+                System.out.println("该位置已经有棋子，请重新选择下子位置！");
+                continue;
+            }
             //根据用户输入的坐标来调整棋盘中的图案，策略为改变数组的元素值
             if(flag){
                 //当黑方落子时就将数组中对应元素值改为1
@@ -81,28 +86,79 @@ public class Wuziqi {
 
     //自定义成员方法来判断用户是否获胜，获胜的规则是：任意相同颜色的5个棋子连成一线
     boolean judge(int ix, int iy){
-        //1.判断竖向是否连成一线，则需要以该点为中心向上四个点向下四个点
-        //声明变量来统计竖向相同颜色棋子的个数，先统计向上同色棋子的个数
+        // 1.判断竖向
         int count = 1;
         for(int i = ix-1; i >= 0 && i >= ix-4; i--){
-            //若当前点代表的棋子与上述某个点代表的棋子不一样，则向上统计结束
             if(chessBoard[ix][iy] != chessBoard[i][iy]){
                 break;
             }
             count++;
         }
-        System.out.println("count1 = " + count);
-        //再统计向下颜色相同的个数
-        for(int i = ix+1; i <= 15 && i <= ix+4; i++){
+        for(int i = ix+1; i < 16 && i <= ix+4; i++){
             if(chessBoard[ix][iy] != chessBoard[i][iy]){
                 break;
             }
             count++;
         }
-        System.out.println("count2 = " + count);
-        //... ...
-        return count >= 5;
+        if (count>=5){
+            return true;
+        }
+
+        // 2. 判断横向
+        count = 1;
+        for(int i = iy-1; i >= 0 && i >= iy-4; i--){
+            if(chessBoard[ix][iy] != chessBoard[ix][i]){
+                break;
+            }
+            count++;
+        }
+        for(int i = iy+1; i < 16 && i <= iy+4; i++){
+            if(chessBoard[ix][iy] != chessBoard[ix][i]){
+                break;
+            }
+            count++;
+        }
+        if (count>=5){
+            return true;
+        }
+
+        // 3. 判断右下向
+        count = 1;
+        for(int i = ix-1, j=iy-1; i >= 0 && i >= ix-4 && j>=0 && j>=iy-4; i--, j--){
+            if(chessBoard[ix][iy] != chessBoard[i][j]){
+                break;
+            }
+            count++;
+        }
+        for(int i = ix+1, j=iy+1; i < 16 && i <= ix+4 && j<16 && j<=iy+4; i++, j++){
+            if(chessBoard[ix][iy] != chessBoard[i][j]){
+                break;
+            }
+            count++;
+        }
+        if (count>=5){
+            return true;
+        }
+
+        // 4. 判断左下向
+        count = 1;
+        for(int i = ix+1, j=iy-1; i < 16 && i <= ix+4  && j>=0 && j>=iy-4; i++, j--){
+            if(chessBoard[ix][iy] != chessBoard[i][j]){
+                break;
+            }
+            count++;
+        }
+        for(int i = ix-1, j=iy+1; i >= 0 && i >= ix-4 && j<16 && j<=iy+4; i--, j++){
+            if(chessBoard[ix][iy] != chessBoard[i][j]){
+                break;
+            }
+            count++;
+        }
+        if (count>=5){
+            return true;
+        }
 
         //当所有可能胜利的情况都排除了，那么肯定是失败了
+        return false;
     }
 }
