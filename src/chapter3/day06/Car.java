@@ -1,8 +1,8 @@
 package chapter3.day06;
 
 public class Car {
-    String brand;
-    String color;
+    private String brand;
+    private String color;
 
     public Car(String brand, String color) {
         this.brand = brand;
