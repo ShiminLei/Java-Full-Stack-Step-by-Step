@@ -6,13 +6,13 @@ public class Solution extends Object{
         Node head = new Node(5);
         head.next = new Node(3);
         head.next.next = new Node(2);
+        head.next.next.next = new Node(2);
         head.toPrint();
 
         // mergeSort
         Solution s = new Solution();
-//        s.mergeSort(head).toPrint();
-        System.out.println(""+123);
-        String so = ""+134;
+        s.mergeSort(head).toPrint();
+
 
     }
 
