@@ -1,4 +1,4 @@
-package day01;
+package chapter3.day01;
 
 import java.io.IOException;
 

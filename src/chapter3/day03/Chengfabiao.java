@@ -1,4 +1,4 @@
-package day03;
+package chapter3.day03;
 
 public class Chengfabiao {
     public static void main(String[] args) {
