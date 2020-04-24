@@ -31,9 +31,5 @@ public class Task {
         cl.set(Calendar.MONTH, 2);
         cl.set(Calendar.DAY_OF_MONTH, 14);
         System.out.println(cl.get(Calendar.WEDNESDAY));
-
-
     }
-
-
 }
