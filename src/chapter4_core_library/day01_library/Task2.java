@@ -1,10 +1,9 @@
-package chapter4.day01;
+package chapter4_core_library.day01_library;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Scanner;
 
 public class Task2 {
     public static void main(String[] args) throws ParseException {

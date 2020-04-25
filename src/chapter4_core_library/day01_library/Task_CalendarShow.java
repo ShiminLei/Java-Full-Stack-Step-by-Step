@@ -1,13 +1,12 @@
-package chapter4.day01;
+package chapter4_core_library.day01_library;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
-public class CalendarShow {
+public class Task_CalendarShow {
 
     public static void main(String[] args) throws ParseException {
         Scanner sc = new Scanner(System.in);
