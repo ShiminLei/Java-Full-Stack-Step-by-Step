@@ -6,7 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
-public class Task {
+public class Task2 {
     public static void main(String[] args) throws ParseException {
         //获取当前的日期,并把这个日期转换为指定格式的字符串,如2088-08-08 08:08:08。
         Date now = new Date();

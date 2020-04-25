@@ -7,7 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
-public class Main {
+public class CalendarShow {
 
     public static void main(String[] args) throws ParseException {
         Scanner sc = new Scanner(System.in);
@@ -18,12 +18,12 @@ public class Main {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date startDate = df.parse("2016-01-01");
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month);
+        java.util.Calendar calendar = java.util.Calendar.getInstance();
+        calendar.set(java.util.Calendar.YEAR, year);
+        calendar.set(java.util.Calendar.MONTH, month);
 
-        calendar.set(Calendar.DAY_OF_MONTH, 1);
-        int weekStart = calendar.get(Calendar.DAY_OF_WEEK);
+        calendar.set(java.util.Calendar.DAY_OF_MONTH, 1);
+        int weekStart = calendar.get(java.util.Calendar.DAY_OF_WEEK);
 
         System.out.println("日\t\t一\t\t二\t\t三\t\t四\t\t五\t\t六");
         for (int i=1;i<weekStart;i++){
@@ -32,25 +32,25 @@ public class Main {
 
         int countRelax = 0;
         int countWeekend = 0;
-        int maxDate = calendar.getActualMaximum(Calendar.DATE);
+        int maxDate = calendar.getActualMaximum(java.util.Calendar.DATE);
         for (int i=1;i<= maxDate;i++){
-            calendar.set(Calendar.DAY_OF_MONTH, i);
+            calendar.set(java.util.Calendar.DAY_OF_MONTH, i);
             Date temp = calendar.getTime();
             int gap = getGapDay(startDate, temp);
             if (gap%4==1){
-                System.out.printf("%-8s","["+calendar.get(Calendar.DAY_OF_MONTH)+"]");
+                System.out.printf("%-8s","["+calendar.get(java.util.Calendar.DAY_OF_MONTH)+"]");
                 countRelax++;
-                if (calendar.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY||calendar.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY){
+                if (calendar.get(java.util.Calendar.DAY_OF_WEEK)== java.util.Calendar.SATURDAY||calendar.get(java.util.Calendar.DAY_OF_WEEK)== java.util.Calendar.SUNDAY){
                     countWeekend++;
                 }
             }else {
-                System.out.printf("%-8s", calendar.get(Calendar.DAY_OF_MONTH));
+                System.out.printf("%-8s", calendar.get(java.util.Calendar.DAY_OF_MONTH));
             }
 
-            if(calendar.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY){
+            if(calendar.get(java.util.Calendar.DAY_OF_WEEK)== java.util.Calendar.SATURDAY){
                 System.out.println();
             }
-            calendar.add(Calendar.DAY_OF_MONTH,1);
+            calendar.add(java.util.Calendar.DAY_OF_MONTH,1);
         }
         System.out.println("本月休息的天数有："+countRelax);
         System.out.println("本月轮到周末休息的天数有："+countWeekend);
