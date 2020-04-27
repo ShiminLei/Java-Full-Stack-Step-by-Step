@@ -1,6 +1,6 @@
 package chapter4_core_library.day05_multithread;
 
-public class Note3 {
+public class Note3_sleep {
     public static void main(String[] args) throws InterruptedException {
         System.out.println(Thread.currentThread().getName());
         new Thread(new MyRunnable(),"a").start();
