@@ -16,6 +16,7 @@ public class Note3_IOStream {
 
         FileWriter fw = new FileWriter("text.txt");
         fw.append("aaaaaa");
+        fw.flush();//清除缓存
         fw.close();
 
         FileReader fr = new FileReader("text.txt");
