@@ -19,8 +19,8 @@ public class Note9_lock {
         @Override
         public void run() {
             while (true){
-                l.lock();
                 if (count>0){
+                    l.lock();
                     System.out.println("正在准备卖票");
                     try {
                         Thread.sleep(100);
@@ -29,12 +29,11 @@ public class Note9_lock {
                     }
                     count--;
                     System.out.println(Thread.currentThread().getName()+"出票成功，余票 "+count);
+                    l.unlock();
                 }else {
                     System.out.println("break");
                     break;
                 }
-                l.unlock();
-                System.out.println("unlock");
             }
 
 
