@@ -19,8 +19,17 @@ public class Demo {
                 @Override
                 public void run() {
                     try {
-                        InputStream is = socket.getInputStream();
+                        // 1. 给客户端发消息
                         OutputStream os = socket.getOutputStream();
+                        PrintStream ps = new PrintStream(os);
+                        ps.println("welcome!");
+
+                        // 4. 收到客户端回话
+                        InputStream is = socket.getInputStream();
+                        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                        String text = br.readLine();
+                        System.out.println("服务器接到客户端的回复："+text);
+
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -30,18 +39,6 @@ public class Demo {
         }
 
 
-//        OutputStream os = socket.getOutputStream();
-//        PrintStream ps = new PrintStream(os);
-//        ps.println("welcome!");
-//
-//        InputStream is = socket.getInputStream();
-//        BufferedReader br = new BufferedReader(new InputStreamReader(is));
-//        String text = br.readLine();
-//        System.out.println("服务器接到客户端的回复："+text);
-
-
-
-//        System.out.println("服务器程序执行结束");
 
     }
 }
