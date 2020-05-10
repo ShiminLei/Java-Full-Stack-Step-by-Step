@@ -19,16 +19,24 @@ public class Demo {
                 @Override
                 public void run() {
                     try {
-                        // 1. 给客户端发消息
-                        OutputStream os = socket.getOutputStream();
-                        PrintStream ps = new PrintStream(os);
-                        ps.println("welcome!");
-
-                        // 4. 收到客户端回话
                         InputStream is = socket.getInputStream();
                         BufferedReader br = new BufferedReader(new InputStreamReader(is));
-                        String text = br.readLine();
-                        System.out.println("服务器接到客户端的回复："+text);
+
+                        OutputStream os = socket.getOutputStream();
+                        PrintStream ps = new PrintStream(os);
+
+                        // 1. 发
+                        ps.println("1");
+
+                        // 4. 收
+                        System.out.println(br.readLine());
+                        // 5. 发
+                        ps.println("3");
+
+                        // 8. 收
+                        System.out.println(br.readLine());
+                        // 9. 发
+                        ps.println("5");
 
                     } catch (IOException e) {
                         e.printStackTrace();

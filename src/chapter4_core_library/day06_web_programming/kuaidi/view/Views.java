@@ -2,6 +2,7 @@ package chapter4_core_library.day06_web_programming.kuaidi.view;
 
 import chapter4_core_library.day06_web_programming.kuaidi.bean.Express;
 
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.List;
@@ -12,16 +13,22 @@ public class Views {
     private Scanner input;
     private PrintStream ps;
 
+    public Views(InputStream is, OutputStream os) {
+        input = new Scanner(is);
+        ps = new PrintStream(os);
+    }
+
     public Views() {
         input = new Scanner(System.in);
+        ps = System.out;
     }
 
     public void welcome(){
-        System.out.println("欢迎使用快递管理系统～");
+        ps.println("欢迎使用快递管理系统～");
     }
 
     public void bye(){
-        System.out.println("欢迎下次再次使用～");
+        ps.println("欢迎下次再次使用～");
     }
 
     /**
@@ -29,10 +36,10 @@ public class Views {
      * @return
      */
     public int menu(){
-        System.out.println("请根据提示，输入功能序号");
-        System.out.println("1. 快递员");
-        System.out.println("2. 普通用户");
-        System.out.println("0. 退出");
+        ps.println("请根据提示，输入功能序号");
+        ps.println("1. 快递员");
+        ps.println("2. 普通用户");
+        ps.println("0. 退出");
         String text = input.nextLine();
         int num = -1;
         try{
@@ -41,7 +48,7 @@ public class Views {
 
         }
         if (num<0 || num>2){
-            System.out.println("输入有误请重新检查");
+            ps.println("输入有误请重新检查");
             return menu();
         }else {
             return num;
@@ -53,12 +60,12 @@ public class Views {
      * @return
      */
     public int cMenu(){
-        System.out.println("请根据提示，输入功能序号");
-        System.out.println("1. 快递员录入");
-        System.out.println("2. 快递修改");
-        System.out.println("3. 快递删除");
-        System.out.println("4. 查看所有快递");
-        System.out.println("0. 返回上级目录");
+        ps.println("请根据提示，输入功能序号");
+        ps.println("1. 快递员录入");
+        ps.println("2. 快递修改");
+        ps.println("3. 快递删除");
+        ps.println("4. 查看所有快递");
+        ps.println("0. 返回上级目录");
         String text = input.nextLine();
         int num = -1;
         try{
@@ -67,7 +74,7 @@ public class Views {
 
         }
         if (num<0 || num>4){
-            System.out.println("输入有误请重新检查");
+            ps.println("输入有误请重新检查");
             return cMenu();
         }else {
             return num;
@@ -79,10 +86,10 @@ public class Views {
      * @return 包含了快递单号和快递公司的录入对象
      */
     public Express insert(){
-        System.out.println("请根据提示，输入快递信息");
-        System.out.println("请输入快递单号：");
+        ps.println("请根据提示，输入快递信息");
+        ps.println("请输入快递单号：");
         String number = input.nextLine();
-        System.out.println("请输入快递公司：");
+        ps.println("请输入快递公司：");
         String company = input.nextLine();
         Express express = new Express();
         express.setCompany(company);
@@ -95,8 +102,8 @@ public class Views {
      * @return
      */
     public String findByNumber(){
-        System.out.println("请根据提示，输入快递信息");
-        System.out.println("请输入要操作的快递单号：");
+        ps.println("请根据提示，输入快递信息");
+        ps.println("请输入要操作的快递单号：");
         String number = input.nextLine();
         return number;
     }
@@ -106,12 +113,12 @@ public class Views {
      * @param e
      */
     public void printExpress(Express e){
-        System.out.println("快递信息如下：");
-        System.out.println(e);
+        ps.println("快递信息如下：");
+        ps.println(e);
     }
 
     public void printNull(){
-        System.out.println("快递不存在，请检查您的输入");
+        ps.println("快递不存在，请检查您的输入");
     }
 
     /**
@@ -119,9 +126,9 @@ public class Views {
      * @param e
      */
     public void update(Express e){
-        System.out.println("请输入新的快递单号：");
+        ps.println("请输入新的快递单号：");
         String number = input.nextLine();
-        System.out.println("请输入新的快递公司：");
+        ps.println("请输入新的快递公司：");
         String company = input.nextLine();
         e.setNumber(number);
         e.setCompany(company);
@@ -132,9 +139,9 @@ public class Views {
      * @return
      */
     public int delete(){
-        System.out.println("是否确认删除：");
-        System.out.println("1. 确认删除");
-        System.out.println("2. 取消操作");
+        ps.println("是否确认删除：");
+        ps.println("1. 确认删除");
+        ps.println("2. 取消操作");
         String text = input.nextLine();
         int num = -1;
         try{
@@ -143,7 +150,7 @@ public class Views {
 
         }
         if (num<1 || num>2){
-            System.out.println("输入有误请重新检查");
+            ps.println("输入有误请重新检查");
             return delete();
         }else {
             return num;
@@ -159,13 +166,13 @@ public class Views {
             for (int j=0; j<10; j++){
                 if (expresses[i][j]!=null){
                     count++;
-                    System.out.println("位置：" + i + "," + j);
+                    ps.println("位置：" + i + "," + j);
                     printExpress(expresses[i][j]);
                 }
             }
         }
         if (count==0){
-            System.out.println("暂无快递信息");
+            ps.println("暂无快递信息");
         }
     }
 
@@ -174,8 +181,8 @@ public class Views {
      * @return
      */
     public int uMenu(){
-        System.out.println("请根据提示，进行取件");
-        System.out.println("请输入您的取件码：");
+        ps.println("请根据提示，进行取件");
+        ps.println("请输入您的取件码：");
         String code = input.nextLine();
         int num = -1;
         try{
@@ -184,7 +191,7 @@ public class Views {
 
         }
         if (num<100000 || num>999999){
-            System.out.println("输入有误请重新检查");
+            ps.println("输入有误请重新检查");
             return uMenu();
         }else {
             return num;
@@ -195,15 +202,14 @@ public class Views {
      * 快递已经存在
      */
     public void expressExist(){
-        System.out.println("此单号在快递柜中已存在，请检查单号是否有误");
+        ps.println("此单号在快递柜中已存在，请检查单号是否有误");
     }
 
     public void printCode(Express express){
-        System.out.println("快件的取件码为："+express.getCode());
+        ps.println("快件的取件码为："+express.getCode());
     }
 
     public void success(){
-        System.out.println("操作成功");
+        ps.println("操作成功");
     }
-
 }

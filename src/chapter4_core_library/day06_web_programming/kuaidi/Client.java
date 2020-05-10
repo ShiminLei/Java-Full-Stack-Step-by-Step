@@ -9,21 +9,22 @@ public class Client {
         Scanner sc = new Scanner(System.in);
 
         Socket socket = new Socket("127.0.0.1", 55565);
-        OutputStream os = socket.getOutputStream();
         InputStream is = socket.getInputStream();
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-//        while (true){
+        OutputStream os = socket.getOutputStream();
+        PrintStream ps = new PrintStream(os);
 
-            // 客户端发话
-            PrintStream ps = new PrintStream(os);
-            ps.println("hello");
+        while (true){
 
-            // 客户端收到消息
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            String text = br.readLine();
-            System.out.println("客户端接到消息："+text);
+            // 收
+            System.out.println(br.readLine());
 
-//        }
+            // 发
+            ps.println(sc.nextLine());
+
+
+        }
 
     }
 }

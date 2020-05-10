@@ -4,12 +4,18 @@ import chapter4_core_library.day06_web_programming.kuaidi.bean.Express;
 import chapter4_core_library.day06_web_programming.kuaidi.dao.ExpressDao;
 import chapter4_core_library.day06_web_programming.kuaidi.view.Views;
 
+import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Scanner;
+
 
 public class Main {
     private static Views views;
     private static ExpressDao dao;
+
+    public Main(InputStream is, OutputStream os) {
+        views = new Views(is, os);
+        dao = new ExpressDao();
+    }
 
     public Main() {
         views = new Views();
