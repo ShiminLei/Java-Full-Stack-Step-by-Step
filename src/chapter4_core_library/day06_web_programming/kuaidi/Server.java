@@ -1,12 +1,10 @@
 package chapter4_core_library.day06_web_programming.kuaidi;
 
 import chapter4_core_library.day06_web_programming.kuaidi.main.Main;
-import chapter4_core_library.day06_web_programming.kuaidi.view.Views;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Scanner;
 
 public class Server {
     public static void main(String[] args) throws IOException {
