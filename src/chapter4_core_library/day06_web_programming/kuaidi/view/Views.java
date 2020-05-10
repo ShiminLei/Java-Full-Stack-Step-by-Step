@@ -25,6 +25,7 @@ public class Views {
 
     public void welcome(){
         ps.println("欢迎使用快递管理系统～");
+        input.nextLine();
     }
 
     public void bye(){
@@ -36,10 +37,7 @@ public class Views {
      * @return
      */
     public int menu(){
-        ps.println("请根据提示，输入功能序号");
-        ps.println("1. 快递员");
-        ps.println("2. 普通用户");
-        ps.println("0. 退出");
+        ps.println("请根据提示，输入功能序号 1. 快递员 2. 普通用户 0. 退出");
         String text = input.nextLine();
         int num = -1;
         try{
@@ -49,6 +47,7 @@ public class Views {
         }
         if (num<0 || num>2){
             ps.println("输入有误请重新检查");
+            input.nextLine();
             return menu();
         }else {
             return num;
@@ -60,12 +59,7 @@ public class Views {
      * @return
      */
     public int cMenu(){
-        ps.println("请根据提示，输入功能序号");
-        ps.println("1. 快递员录入");
-        ps.println("2. 快递修改");
-        ps.println("3. 快递删除");
-        ps.println("4. 查看所有快递");
-        ps.println("0. 返回上级目录");
+        ps.println("请根据提示，输入功能序号 1. 快递员录入 2. 快递修改 3. 快递删除 4. 查看所有快递 0. 返回上级目录");
         String text = input.nextLine();
         int num = -1;
         try{
@@ -75,6 +69,7 @@ public class Views {
         }
         if (num<0 || num>4){
             ps.println("输入有误请重新检查");
+            input.nextLine();
             return cMenu();
         }else {
             return num;
@@ -87,6 +82,7 @@ public class Views {
      */
     public Express insert(){
         ps.println("请根据提示，输入快递信息");
+        input.nextLine();
         ps.println("请输入快递单号：");
         String number = input.nextLine();
         ps.println("请输入快递公司：");
@@ -102,7 +98,6 @@ public class Views {
      * @return
      */
     public String findByNumber(){
-        ps.println("请根据提示，输入快递信息");
         ps.println("请输入要操作的快递单号：");
         String number = input.nextLine();
         return number;
@@ -113,12 +108,13 @@ public class Views {
      * @param e
      */
     public void printExpress(Express e){
-        ps.println("快递信息如下：");
-        ps.println(e);
+        ps.println("快递信息如下："+e);
+        input.nextLine();
     }
 
     public void printNull(){
         ps.println("快递不存在，请检查您的输入");
+        input.nextLine();
     }
 
     /**
@@ -139,9 +135,7 @@ public class Views {
      * @return
      */
     public int delete(){
-        ps.println("是否确认删除：");
-        ps.println("1. 确认删除");
-        ps.println("2. 取消操作");
+        ps.println("是否确认删除：1. 确认删除 2. 取消操作");
         String text = input.nextLine();
         int num = -1;
         try{
@@ -151,6 +145,7 @@ public class Views {
         }
         if (num<1 || num>2){
             ps.println("输入有误请重新检查");
+            input.nextLine();
             return delete();
         }else {
             return num;
@@ -167,12 +162,14 @@ public class Views {
                 if (expresses[i][j]!=null){
                     count++;
                     ps.println("位置：" + i + "," + j);
+                    input.nextLine();
                     printExpress(expresses[i][j]);
                 }
             }
         }
         if (count==0){
             ps.println("暂无快递信息");
+            input.nextLine();
         }
     }
 
@@ -181,8 +178,8 @@ public class Views {
      * @return
      */
     public int uMenu(){
-        ps.println("请根据提示，进行取件");
         ps.println("请输入您的取件码：");
+        input.nextLine();
         String code = input.nextLine();
         int num = -1;
         try{
@@ -192,6 +189,7 @@ public class Views {
         }
         if (num<100000 || num>999999){
             ps.println("输入有误请重新检查");
+            input.nextLine();
             return uMenu();
         }else {
             return num;
@@ -203,13 +201,16 @@ public class Views {
      */
     public void expressExist(){
         ps.println("此单号在快递柜中已存在，请检查单号是否有误");
+        input.nextLine();
     }
 
     public void printCode(Express express){
         ps.println("快件的取件码为："+express.getCode());
+        input.nextLine();
     }
 
     public void success(){
         ps.println("操作成功");
+        input.nextLine();
     }
 }

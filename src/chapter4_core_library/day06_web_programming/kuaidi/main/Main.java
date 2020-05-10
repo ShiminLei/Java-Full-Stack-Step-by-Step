@@ -17,6 +17,10 @@ public class Main {
         dao = new ExpressDao();
     }
 
+    public ExpressDao getDao() {
+        return dao;
+    }
+
     public Main() {
         views = new Views();
         dao = new ExpressDao();
