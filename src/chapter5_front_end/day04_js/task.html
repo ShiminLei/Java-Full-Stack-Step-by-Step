@@ -6,22 +6,38 @@
     <title>Document</title>
     <script>
 
-        var url = "http://www.***.com/a.html?name=张三&age=20";
+        // 1. 判断一个数是不是素数
+        function isPrimeNum(num){
+            for (var i = 2; i < num; i++) {
+                if (num%i==0){
+                    return false;
+                }
+            };
+            return true;
+        }
+        console.log(isPrimeNum(3));
 
-        console.log(url);
-        url2 = escape(url);
-        console.log(url2);
-        console.log(unescape(url2));
+        // 2. 求数组的平均值
+        function average(array) {
+            var count = 0;
+            var sum = 0;
+            for (var i in array){
+                sum += array[i];
+                count++;
+            }
+            return sum/count;
+        }
+        console.log(average(new Array(1,2,3)));
 
-        console.log("--------------------");
-
-        var str = "var uname='zhangsan',age=20;";
-        eval(str); //将参数str字串当成js脚本程序执行
-        console.log(uname);
-
-        console.log(isNaN("10s"));
-
-        console.log(parseInt("34as4567dfg"));
+        // 3. 计算所有参数的累加值
+        function sum() {
+            var sum = 0;
+            for(var i in arguments){
+                sum += arguments[i];
+            }
+            return sum;
+        }
+        console.log(sum(1,2,3))
 
 
     </script>
