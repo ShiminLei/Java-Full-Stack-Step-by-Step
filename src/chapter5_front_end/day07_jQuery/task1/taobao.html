@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery制作轮播图案例</title>
+    <style type="text/css">
+        img{width:635px}
+        * { margin: 0px; padding: 0px;}/*清除元素自带的外边距和内填充*/
+        #scroll { margin: 10px auto; background-color:gainsboro; width: 635px; height: 300px; overflow: hidden; padding: 10px 0px 10px 10px; border-radius:3%;}/*设置divoverflow部分隐藏hidd,隐藏多余的图片,,同时又可以清除浮动塌陷*/
+        ul { float: left; list-style: none;}/*设置两个ul同时float为left,使其在同一行排列*/
+        #scroll_img li { margin-bottom: 20px;}
+        #scroll_number { margin-left: 10px; padding-top: 20px;}/*设置数字列表的ul左外边距,使两个ul之间有间隔。（设置上填充，使其下沉，不和图片列上对齐，这个可以根据需要设置）*/
+        #scroll_number li { margin-bottom: 20px; width: 13px; height: 13px; font-size: 12px; text-align: center; line-height: 12px; border: 1px solid black;}
+        .scroll_number_over { background-color: orangered; color: white;}/*提前写好一个类样式,作为数字列表的附加样式*/
+    </style>
+    <script src="./jquery-3.5.0.min.js"></script><!--引入jquery-->
+    <script>
+        $(document).ready(function(){
+            function changeImg(){//定义一个函数，用来实现轮播效果
+                var index = 0; //声明一个变量index，用来作为循环索引
+                var stop = false; //声明一个变量stop，用来判断动画状态
+                var $li = $("#scroll_img").children("li");//获id是scroll_img元素的，子元素li，并存储。
+                var $page = $("#scroll_number").children("li");//获取id是scroll_number元素的，子元素li，并存储
+                $page.eq(index).addClass("scroll_number_over").stop(true,true).siblings().removeClass("scroll_number_over");
+                $page.mouseover(function(){
+                    stop = true ;
+                    index = $page.index($(this));
+                    $li.eq(index).stop(true,true).fadeIn().siblings().fadeOut();
+                    $(this).addClass("scroll_number_over").stop(true,true).siblings().removeClass("scroll_number_over");
+                }).mouseout(function(){
+                    stop=false;
+                });
+                setInterval(function(){
+                    if(stop) return ;
+                    index ++;
+                    if(index>=$li.length){
+                        index=0;
+                    }
+                    $li.eq(index).stop(true,true).fadeIn().siblings().fadeOut();
+                    $page.eq(index).addClass("scroll_number_over").stop(true,true).siblings().removeClass("scroll_number_over");
+                },3000)
+            }
+            changeImg();//调用函数
+        })
+    </script>
+</head>
+<body>
+<div id="scroll">
+    <ul id="scroll_img"><!--轮播图片列表-->
+        <li><img src="./img/11.jpg"/></li>
+        <li><img src="./img/22.jpg"/></li>
+        <li><img src="./img/33.jpg"/></li>
+        <li><img src="./img/44.jpg"/></li>
+        <li><img src="./img/33.jpg"/></li>
+    </ul>
+</div>
+<div>
+    <ul id="scroll_number"><!--轮播数字列表-->
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+</div>
+</body>
+</html>
