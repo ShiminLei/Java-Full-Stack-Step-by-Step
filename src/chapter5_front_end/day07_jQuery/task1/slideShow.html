@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>轮播图</title>
+    <style>
+        /* 清除默认样式 */
+        * {margin: 0px;padding: 0px;}
+        ul {list-style: none;}
+
+        /* 居中显示，超出隐藏（只显示一张图） */
+        #outer {
+            width: 600px;
+            height: 360px;
+            margin: 100px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 内层轮播图片设置为相对外层盒子的位置 */
+        .inner {
+            position: absolute;
+        }
+
+        .inner img {
+            width: 600px;
+            height: 360px;
+        }
+
+        /* 
+        内层小白点设置为相对外层盒子的位置
+        通过设置text-align、width使其整体水平居中
+         */
+        .whiteDot {
+            position: absolute;
+            text-align: center;
+            width: 100%;
+            bottom: 15px;
+        }
+
+        /* 
+        设置为行内 块状显示
+        通过设置line-height与height一致，使其字体纵向居中
+
+         */
+        .whiteDot li {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            /* line-height: 15px; */
+            border-radius: 50%;
+            background-color: white;
+            margin: 0px 5px;  /* 增加按钮左右间距 */
+            
+        }
+
+        /* 当前播放的图片的小白点 */
+        .whiteDot .active {
+            background-color: orange;
+        }
+
+        .btn {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            line-height: 40px;  /* 设置line-height与height一致，使其字体垂直居中 */
+            color: white;
+            text-align: center;  /* 字体在背景里水平居中 */
+            margin-top: 160px;
+            font-size: 20px;
+            display: none;
+            
+        }
+        
+
+        /* 分别设置2个按钮靠左和右显示 */
+        .left_btn {
+            left: 0;
+        }
+       
+        .right_btn {
+            right: 0;
+        }
+
+        /* 
+        鼠标悬浮至轮播图,左右按钮显示样式为行级块级兼容
+        鼠标放置在左右按钮时样式为小手
+         */
+        #outer:hover .btn {
+            display: inline-block; 
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- 外层盒子 -->
+    <div id="outer">
+
+        <!-- 内层放图片 -->
+        <ul class="inner">
+            <li><a href="#"><img src="./img/11.jpg"></a></li>
+            <li><a href="#"><img src="./img/22.jpg"></a></li>
+            <li><a href="#"><img src="./img/33.jpg"></a></li>
+            <li><a href="#"><img src="./img/44.jpg"></a></li>
+        </ul>
+
+        <!-- 小白点 -->
+        <ul class="whiteDot">
+            <!-- 属性为active表示正在放映的图 -->
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+        <!-- 左右按钮 -->
+        <div class="btn left_btn"><</div>
+        <div class="btn right_btn">></div>
+    </div>
+
+    <script src="./jquery-3.5.0.min.js"></script>
+    <script>
+        // 由于图片个数与下侧顺序按钮数量一致，可通过位置index进行一一对应
+        var index = 0;
+        // 鼠标移动到白点时，设置其属性为active（背景颜色改为橙色）
+        // 移除其他白点的active属性
+        $(".whiteDot li").mouseover(function() {
+            $(this).addClass("active").siblings().removeClass("active");
+            // 获取当前白点的index
+            index = $(this).index();
+            //通过index获取该位置图片，渐入。其他图片渐出
+            $(".inner li").eq(index).stop().fadeIn().siblings().stop().fadeOut();
+        });
+
+        // 每隔3s 定时轮播
+        var mytime = setInterval(move,3000);
+
+        // 图片轮播
+        function move() {
+            index++;
+            if (index == 4) { //超过最大图片数量，则从头开始
+                index = 0;
+            }
+            //通过index来设置图片进行轮播
+            $(".inner li").eq(index).stop().fadeIn().siblings().stop().fadeOut();
+            //并设置为橙色点
+            $(".whiteDot li").eq(index).addClass("active").siblings().removeClass("active");
+            
+        }
+
+        //鼠标移入/出图片区的事件
+        $("#outer").mouseover(function() {  //移入 停止定时（即停止轮播）
+            clearInterval(mytime);
+        }).mouseout(function() {  //移出 开始定时（即开始轮播）
+            mytime = setInterval(move,3000);
+        });
+
+        //左右按钮绑定点击事件
+        //左按钮切换至上一张图
+        $(".left_btn").click(function() {
+            index--;
+            if (index == -1) {  //如果index为-1，则切换到最后一张图
+                index = 3;
+            }
+            $(".inner li").eq(index).stop().fadeIn().siblings().stop().fadeOut();
+            $(".whiteDot li").eq(index).addClass("active").siblings().removeClass("active");
+        });
+
+        //右按钮切换下一张图
+        $(".right_btn").click(function() {
+            move();
+        });
+
+
+    </script>
+</body>
+</html>
